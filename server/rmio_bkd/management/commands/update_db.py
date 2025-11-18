@@ -13,6 +13,8 @@ styles = [
     "energetic",
 ]
 
+badges = json.load(open("badges.json"))
+
 
 class Command(BaseCommand):
     help = "Updates the database with new info after fetching it from the individual sites."
@@ -32,13 +34,33 @@ class Command(BaseCommand):
                         "most_relevant", []
                     )
                     address = place_info.get("address", "")
+                    place_type = (
+                        place_info.get("type")[0]
+                        if place_info.get("type", [])
+                        else "N/A"
+                    )
+                    reviews_cnt = place_info.get("reviews", 0)
+                    image = place_info.get("thumbnail", "")
 
                     obj, created = Place.objects.get_or_create(
                         id=place_id,
                         name=name,
                         defaults={"rating": rating},
                         address=address,
+                        reviews_cnt=reviews_cnt,
+                        place_type=place_type,
+                        image=image,
                     )
+                    if created or not obj.badges:
+                        exts = place_info.get("extensions", [])
+                        badges_to_add = []
+                        for ext in exts:
+                            for ext_key, ext_list in ext.items():
+                                badges_to_add.extend(
+                                    [i for i in ext_list if i in badges]
+                                )
+                        obj.badges = ", ".join(badges_to_add)
+                        obj.save()
                     styles_list = obj.styles.split(", ") if obj.styles else []
                     if style not in styles_list:
                         styles_list.append(style)

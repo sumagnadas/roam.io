@@ -23,6 +23,9 @@ class PlaceSerializer(serializers.ModelSerializer):
             "address",
             "badges",
             "reviews",
+            "reviews_cnt",
+            "place_type",
+            "image",
         ]
 
 
