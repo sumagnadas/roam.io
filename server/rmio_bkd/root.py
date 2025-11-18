@@ -10,5 +10,6 @@ def api_root(request, format=None):
     return Response(
         {
             "places": reverse("places", request=request, format=format),
+            "reviews": reverse("reviews", request=request, format=format),
         }
     )

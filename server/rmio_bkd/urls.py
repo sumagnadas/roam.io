@@ -18,12 +18,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .root import api_root
-from .views import PlacesView
+from . import root, views
 
 urlpatterns = [
-    path("", api_root),
+    path("", root.api_root),
     path("admin/", admin.site.urls),
     path("api-auth/", include("rest_framework.urls")),
-    path("places/", PlacesView.as_view(), name="places"),
+    path("places/", views.PlacesView.as_view(), name="places"),
+    path("reviews/", views.ReviewsView.as_view(), name="reviews"),
 ]
