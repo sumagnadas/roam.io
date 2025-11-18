@@ -30,3 +30,36 @@ class Review(models.Model):
 
     def __str__(self):
         return f"Review by {self.author_name} for {self.place.name}"
+
+
+class Event(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    event_type = models.CharField(max_length=100)
+    image = models.URLField()
+    description = models.TextField()
+    date = models.DateTimeField()
+    time = models.TimeField()
+    location = models.CharField(max_length=255)
+    price = models.CharField(max_length=50)
+    tickets = models.CharField(max_length=100)
+    isTrending = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
+
+
+class LocalGuide(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255)
+    location = models.CharField(max_length=255)
+    rating = models.FloatField(default=0.0)
+    reviews = models.IntegerField(default=0)
+    tours = models.IntegerField(default=0)
+    image = models.URLField()
+    bio = models.TextField()
+    languages = models.CharField(max_length=255)
+    specialties = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
