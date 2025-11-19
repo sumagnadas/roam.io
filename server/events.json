@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "name": "Summer Jazz Festival",
+        "type": "Music",
+        "image": "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800",
+        "date": "2025-11-20",
+        "time": "19:00",
+        "location": "Central Park Amphitheater",
+        "price": "$35-$75",
+        "tickets": "234 tickets available",
+        "isTrending": true
+    },
+    {
+        "id": 2,
+        "name": "Artisan Food Market",
+        "type": "Food & Drink",
+        "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800",
+        "date": "2025-11-20",
+        "time": "10:00",
+        "location": "Downtown Square",
+        "price": "Free",
+        "isTrending": false
+    }
+]

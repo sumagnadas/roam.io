@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Maria Rodriguez",
+        "location": "Downtown",
+        "rating": 4.9,
+        "reviews": 187,
+        "tours": 312,
+        "image": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200",
+        "bio": "Born and raised here, I love showing visitors the authentic side of our city through its incredible food scene and rich history.",
+        "languages": [
+            "English",
+            "Spanish",
+            "Portuguese"
+        ],
+        "specialties": [
+            "Food Tours",
+            "History",
+            "Hidden Gems"
+        ]
+    },
+    {
+        "id": 2,
+        "name": "James Chen",
+        "location": "Arts District",
+        "rating": 4.8,
+        "reviews": 143,
+        "tours": 256,
+        "image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200",
+        "bio": "Professional photographer turned tour guide. I\"ll show you the most Instagrammable spots and hidden murals in the city.",
+        "languages": [
+            "English",
+            "Mandarin",
+            "Cantonese"
+        ],
+        "specialties": [
+            "Photography Tours",
+            "Street Art",
+            "Architecture"
+        ]
+    },
+    {
+        "id": 3,
+        "name": "Sophie Laurent",
+        "location": "Culinary District",
+        "rating": 5.0,
+        "reviews": 98,
+        "tours": 189,
+        "image": "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200",
+        "bio": "French chef with 15 years experience. Join me for an unforgettable culinary journey through our vibrant food scene.",
+        "languages": [
+            "English",
+            "French",
+            "Italian"
+        ],
+        "specialties": [
+            "Food Tours",
+            "Wine Tasting",
+            "Cooking Classes"
+        ]
+    },
+    {
+        "id": 4,
+        "name": "Amir Hassan",
+        "location": "Historic Quarter",
+        "rating": 4.9,
+        "reviews": 221,
+        "tours": 445,
+        "image": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200",
+        "bio": "History professor passionate about sharing the fascinating stories of our city\"s past and architectural heritage.",
+        "languages": [
+            "English",
+            "Arabic",
+            "French"
+        ],
+        "specialties": [
+            "History Tours",
+            "Architecture",
+            "Museums"
+        ]
+    }
+]

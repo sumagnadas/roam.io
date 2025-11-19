@@ -28,4 +28,5 @@ urlpatterns = [
     path("place/", views.PlaceView.as_view(), name="place_detail"),
     path("events/", views.EventsView.as_view(), name="events"),
     path("guides/", views.LocalGuidesView.as_view(), name="guides"),
+    path("contact/", views.contact_view, name="contact"),
 ]

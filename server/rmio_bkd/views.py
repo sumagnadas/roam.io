@@ -1,4 +1,5 @@
 from rest_framework import generics, mixins, permissions
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 
 from .models import Event, LocalGuide, Place
@@ -80,3 +81,36 @@ class LocalGuidesView(mixins.ListModelMixin, generics.GenericAPIView):
             return Response(serializer.data)
         except Exception as e:
             return Response({"error": str(e)}, status=500)
+
+
+@api_view(["POST"])
+@permission_classes([permissions.AllowAny])
+def contact_view(request):
+    try:
+        data = request.data
+        guide_name = LocalGuide.objects.get(id=data.get("id")).name
+        name = data.get("name")
+        email = data.get("email")
+        message = data.get("message")
+        print(
+            f"""Mail to be sent:
+
+Subject: Inquiry - From {name}
+
+Hello {guide_name}, 
+
+I'm {name} ({email}).
+
+I'm reaching out because:  
+“{message}”
+
+Please let me know availability, pricing, and next steps.
+
+Thank you!"""
+        )
+        # Here you would typically handle the contact form submission,
+        # such as sending an email or saving the message to the database.
+
+        return Response({"success": "Message received. We'll get back to you soon!"})
+    except Exception as e:
+        return Response({"error": str(e)}, status=500)
