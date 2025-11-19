@@ -1,7 +1,7 @@
 import React from 'react';
 import { Sunset, Check, MapPin, Zap, Users } from 'lucide-react';
 import { colors } from '../utils/colors';
-import { moods } from '../data/MockData';
+import { moods } from '../data/mockData';
 
 const HomePage = ({ selectedMood, setSelectedMood, setCurrentPage }) => {
   const handleMoodClick = (moodId) => {
@@ -19,7 +19,7 @@ const HomePage = ({ selectedMood, setSelectedMood, setCurrentPage }) => {
         <p className="text-lg text-white mb-8 opacity-90">
           Intelligent, mood-based exploration that connects you with authentic experiences, hidden gems, and local culture
         </p>
-        
+
         {/* Weather Widget */}
         <div className="inline-block p-6 rounded-xl" style={{ backgroundColor: 'rgba(67, 86, 99, 0.6)' }}>
           <div className="flex items-center justify-between gap-8">
@@ -45,7 +45,7 @@ const HomePage = ({ selectedMood, setSelectedMood, setCurrentPage }) => {
         <p className="text-center mb-8 opacity-70" style={{ color: colors.darkBlue }}>
           Select your mood and we'll curate the perfect experiences for you
         </p>
-        
+
         <div className="grid grid-cols-4 gap-4 max-w-5xl mx-auto">
           {moods.map((mood) => {
             const Icon = mood.icon;
@@ -54,7 +54,7 @@ const HomePage = ({ selectedMood, setSelectedMood, setCurrentPage }) => {
                 key={mood.id}
                 onClick={() => handleMoodClick(mood.id)}
                 className="p-6 rounded-xl border-2 hover:scale-105 transition transform"
-                style={{ 
+                style={{
                   backgroundColor: mood.color,
                   borderColor: selectedMood === mood.id ? colors.darkBlue : 'transparent'
                 }}
