@@ -1,8 +1,13 @@
 from rest_framework import generics, mixins, permissions
 from rest_framework.response import Response
 
-from .models import Place
-from .serializers import PlaceSerializer, PlacesSerializer, ReviewSerializer
+from .models import Event, LocalGuide, Place
+from .serializers import (
+    EventSerializer,
+    LocalGuideSerializer,
+    PlaceSerializer,
+    PlacesSerializer,
+)
 
 
 class PlacesView(mixins.ListModelMixin, generics.GenericAPIView):
@@ -45,5 +50,33 @@ class PlaceView(mixins.RetrieveModelMixin, generics.GenericAPIView):
             return Response(serializer.data)
         except Place.DoesNotExist:
             return Response({"error": "Place not found."}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+
+class EventsView(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        try:
+            serializer = EventSerializer(Event.objects.all(), many=True)
+            return Response(serializer.data)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+
+class LocalGuidesView(mixins.ListModelMixin, generics.GenericAPIView):
+    queryset = LocalGuide.objects.all()
+    serializer_class = LocalGuideSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        try:
+            serializer = LocalGuideSerializer(
+                self.get_queryset(), many=True, context={"request": request}
+            )
+            return Response(serializer.data)
         except Exception as e:
             return Response({"error": str(e)}, status=500)

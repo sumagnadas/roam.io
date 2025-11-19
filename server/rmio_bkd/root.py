@@ -11,5 +11,7 @@ def api_root(request, format=None):
         {
             "places": reverse("places", request=request, format=format),
             "place": reverse("place_detail", request=request, format=format),
+            "events": reverse("events", request=request, format=format),
+            "local_guides": reverse("local_guides", request=request, format=format),
         }
     )

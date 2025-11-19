@@ -26,4 +26,6 @@ urlpatterns = [
     path("api-auth/", include("rest_framework.urls")),
     path("places/", views.PlacesView.as_view(), name="places"),
     path("place/", views.PlaceView.as_view(), name="place_detail"),
+    path("events/", views.EventsView.as_view(), name="events"),
+    path("guides/", views.LocalGuidesView.as_view(), name="guides"),
 ]
