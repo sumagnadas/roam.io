@@ -1,15 +1,13 @@
 import React from 'react';
 import { HelpCircle } from 'lucide-react';
-import { colors } from '../utils/colors';
 
 const HelpButton = () => {
   return (
     <button
-      className="fixed bottom-6 right-6 w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition"
-      style={{ backgroundColor: colors.darkBlue }}
       onClick={() => alert('Help & Support Coming Soon!')}
+      className="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-gradient-to-br from-[#313647] to-[#475569] shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:rotate-6 hover:from-[#A3B087] hover:to-[#8FA077] z-50 group"
     >
-      <HelpCircle className="w-6 h-6 text-white" />
+      <HelpCircle className="w-8 h-8 text-white transition-transform group-hover:-rotate-6" />
     </button>
   );
 };
