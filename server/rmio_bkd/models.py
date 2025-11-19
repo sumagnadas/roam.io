@@ -14,6 +14,7 @@ class Place(models.Model):
     reviews_cnt = models.IntegerField(default=0)
     place_type = models.CharField(max_length=100, blank=True, null=True)
     image = models.URLField(blank=True, null=True)
+    is_hidden_gem = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -37,8 +38,7 @@ class Event(models.Model):
     name = models.CharField(max_length=255)
     event_type = models.CharField(max_length=100)
     image = models.URLField()
-    description = models.TextField()
-    date = models.DateTimeField()
+    date = models.DateField()
     time = models.TimeField()
     location = models.CharField(max_length=255)
     price = models.CharField(max_length=50)
@@ -46,7 +46,7 @@ class Event(models.Model):
     isTrending = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.title
+        return f"{self.name} on {self.date} at {self.time}"
 
 
 class LocalGuide(models.Model):

@@ -20,7 +20,7 @@ class Command(BaseCommand):
     help = "Updates the database with new info after fetching it from the individual sites."
 
     def handle(self, *args, **options):
-        from rmio_bkd.models import Place, Review
+        from rmio_bkd.models import Event, LocalGuide, Place, Review
 
         for style in styles:
             with open(f"serpapi_results/{style}_detailed.json", "r") as f:
@@ -41,6 +41,7 @@ class Command(BaseCommand):
                     )
                     reviews_cnt = place_info.get("reviews", 0)
                     image = place_info.get("thumbnail", "")
+                    is_hidden_gem = rating >= 4.5 and reviews_cnt >= 50
 
                     obj, created = Place.objects.get_or_create(
                         id=place_id,
@@ -50,6 +51,7 @@ class Command(BaseCommand):
                         reviews_cnt=reviews_cnt,
                         place_type=place_type,
                         image=image,
+                        is_hidden_gem=is_hidden_gem,
                     )
                     if created or not obj.badges:
                         exts = place_info.get("extensions", [])
@@ -82,4 +84,15 @@ class Command(BaseCommand):
             self.stdout.write(
                 self.style.SUCCESS(f"Updated database for style: {style}")
             )
+        with open("events.json") as f:
+            events_data = json.load(f)
+            for event in events_data:
+                event["event_type"] = event.pop("type")
+                Event.objects.get_or_create(**event)
+        with open("guides.json") as f:
+            guides_data = json.load(f)
+            for guide in guides_data:
+                guide["languages"] = ", ".join(guide.get("languages"))
+                guide["specialties"] = ", ".join(guide.get("specialties"))
+                LocalGuide.objects.get_or_create(**guide)
         self.stdout.write(self.style.SUCCESS("Database updated successfully."))
