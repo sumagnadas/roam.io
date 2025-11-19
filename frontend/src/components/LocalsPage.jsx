@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Check, Star, MapPin, MessageCircle, Award, Globe } from 'lucide-react';
-import { localGuides } from '../data/MockData';
+import { localGuides } from '../data/mockData';
 
 const LocalsPage = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
