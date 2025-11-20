@@ -1,8 +1,13 @@
 import React, { useState } from 'react';
 import { Check, Star, MapPin, MessageCircle, Award, Globe } from 'lucide-react';
 import { localGuides } from '../data/mockData';
+import TourContactForm from "../components/TourContactForm";
+
 
 const LocalsPage = () => {
+
+  const [selectedGuide, setSelectedGuide] = useState(null);
+  const [isFormOpen, setIsFormOpen] = useState(false);
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
@@ -139,14 +144,30 @@ const LocalsPage = () => {
               </div>
               
               {/* Contact Button */}
-              <button className="w-full py-4 rounded-xl bg-[#313647] text-white font-semibold transition-all duration-300 flex items-center justify-center gap-3 hover:bg-[#475569] hover:-translate-y-1 hover:shadow-xl">
-                <MessageCircle className="w-5 h-5" />
-                Contact {guide.name.split(' ')[0]}
-              </button>
+              <button
+  className="w-full py-4 rounded-xl bg-[#313647] text-white font-semibold transition-all duration-300 flex items-center justify-center gap-3 hover:bg-[#475569] hover:-translate-y-1 hover:shadow-xl"
+  onClick={() => {
+    setSelectedGuide(guide);
+    setIsFormOpen(true);
+  }}
+>
+  <MessageCircle className="w-5 h-5" />
+  Contact {guide.name.split(' ')[0]}
+</button>
+
             </div>
           ))}
         </div>
       </div>
+      {isFormOpen && (
+  <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+    <TourContactForm 
+      guide={selectedGuide}
+      onClose={() => setIsFormOpen(false)}
+    />
+  </div>
+)}
+
     </div>
   );
 };
