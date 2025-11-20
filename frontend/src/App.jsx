@@ -6,6 +6,7 @@ import EventsPage from './components/EventsPage';
 import LocalsPage from './components/LocalsPage';
 import HelpButton from './components/HelpButton';
 import './App.css';
+import Footer from './components/Footer';
 
 const App = () => {
   const [currentPage, setCurrentPage] = useState('home');
@@ -27,6 +28,8 @@ const App = () => {
       {currentPage === 'locals' && <LocalsPage />}
       
       <HelpButton />
+
+      <Footer />
     </div>
   );
 };
