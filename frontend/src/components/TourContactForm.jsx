@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { X, Mail, User, Send } from 'lucide-react';
+import { apiClient } from "../data/mockData";
 
 export default function TourContactForm({ guide, onClose }) {
   const [formData, setFormData] = useState({
@@ -10,7 +11,19 @@ export default function TourContactForm({ guide, onClose }) {
 
   const handleSubmit = () => {
     if (formData.name && formData.email && formData.message) {
-      alert('Contact request sent!');
+      console.log(guide, formData.name, formData.email, formData.message);
+      apiClient.post('/contact/', {
+        id: guide.id,
+        name: formData.name,
+        email: formData.email,
+        message: formData.message
+      })
+        .then(response => {
+          response.status === 200 &&
+            alert(response.data.message);
+        }).catch(error => {
+          alert('An error occurred. Please try again later.');
+        });
     } else {
       alert('Please fill in all fields');
     }
@@ -18,13 +31,13 @@ export default function TourContactForm({ guide, onClose }) {
 
   return (
     <div>
-      <div 
+      <div
         className="w-full max-w-2xl rounded-2xl overflow-hidden shadow-[0_8px_28px_rgba(0,0,0,0.55)]"
         style={{ backgroundColor: '#2A3040' }}
       >
-        
+
         {/* Header */}
-        <div 
+        <div
           className="flex items-center justify-between p-6"
           style={{ backgroundColor: '#313647' }}
         >
@@ -45,7 +58,7 @@ export default function TourContactForm({ guide, onClose }) {
             </div>
           </div>
 
-          <button 
+          <button
             onClick={onClose}
             className="text-gray-500 hover:text-white transition"
           >
@@ -64,14 +77,14 @@ export default function TourContactForm({ guide, onClose }) {
 
         {/* Form Body */}
         <div className="p-8 space-y-6">
-          
+
           {/* Name */}
           <div>
             <label className="block text-white text-sm font-medium mb-2">
               Your Name
             </label>
             <div className="relative">
-              <User 
+              <User
                 size={18}
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
               />
@@ -91,7 +104,7 @@ export default function TourContactForm({ guide, onClose }) {
               Email Address
             </label>
             <div className="relative">
-              <Mail 
+              <Mail
                 size={18}
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
               />

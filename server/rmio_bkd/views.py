@@ -111,6 +111,6 @@ Thank you!"""
         # Here you would typically handle the contact form submission,
         # such as sending an email or saving the message to the database.
 
-        return Response({"success": "Message received. We'll get back to you soon!"})
+        return Response({"message": "Message received. We'll get back to you soon!"})
     except Exception as e:
         return Response({"error": str(e)}, status=500)
