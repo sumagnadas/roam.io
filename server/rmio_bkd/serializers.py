@@ -56,10 +56,18 @@ class PlacesSerializer(serializers.ModelSerializer):
     name = serializers.CharField(max_length=255)
     rating = serializers.FloatField()
     styles = serializers.CharField()
+    badges = serializers.SerializerMethodField()
+    image = serializers.URLField()
+    reviews = serializers.IntegerField(source="reviews_cnt")
+    isHiddenGem = serializers.BooleanField(source="is_hidden_gem")
 
     class Meta:
         model = Place
-        fields = ["id", "name", "rating", "styles"]
+        fields = "__all__"
+
+    def get_badges(self, obj: Place):
+        badges = obj.badges.split(", ")
+        return badges
 
 
 class EventSerializer(serializers.Serializer):
@@ -91,6 +99,15 @@ class EventSerializer(serializers.Serializer):
 
 
 class LocalGuideSerializer(serializers.ModelSerializer):
+    languages = serializers.SerializerMethodField()
+    specialties = serializers.SerializerMethodField()
+
     class Meta:
         model = LocalGuide
         fields = "__all__"
+
+    def get_languages(self, obj: LocalGuide):
+        return obj.languages.split(", ")
+
+    def get_specialties(self, obj: LocalGuide):
+        return obj.languages.split(", ")
