@@ -94,10 +94,15 @@ This is the fastest way to view the client application in development mode.
     ```bash
     pip install -r requirements.txt
     ```
-6.  Start the development server:
+6.  Migrate and populate the database
+    ```bash
+    python manage.py migrate
+    python manage.py update_db
+    ```
+7.  Start the development server:
     ```bash
     python manage.py runserver
     ```
-7.  Open your browser and navigate to the address shown in your console (usually `http://localhost:5173`).
+8.  Open your browser and navigate to the address shown in your console (usually `http://localhost:5173`).
 
 ---
