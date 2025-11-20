@@ -1,9 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Star, MapPin, DollarSign, Navigation, Heart, Share2, Sparkles, IndianRupee } from 'lucide-react';
-import { spots } from '../data/mockData';
+import { apiClient } from '../data/mockData';
 
-const DiscoverPage = () => {
+const DiscoverPage = ({ selectedMood }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
+  const [spots, setSpots] = useState([]);
+  useEffect(() => {
+    async function fetchSpots() {
+      const spots_response = await apiClient.post('/places/', { style: selectedMood ?? "" });
+      const data = await spots_response.data;
+      setSpots(data);
+    }
+    fetchSpots()
+  }, [selectedMood]);
 
   return (
     <div className="min-h-screen bg-[#FFF8D4] py-12">
@@ -14,7 +23,7 @@ const DiscoverPage = () => {
             <Sparkles className="w-4 h-4 text-[#A3B087]" />
             <span className="text-[#A3B087] text-sm font-semibold">Curated For You</span>
           </div>
-          
+
           <h1 className="text-5xl font-bold mb-2 text-[#313647] tracking-tight">
             Discover Amazing Places
           </h1>
@@ -22,7 +31,7 @@ const DiscoverPage = () => {
             Handpicked locations that match your vibe
           </p>
         </div>
-        
+
         {/* Spots Grid */}
         <div className="grid grid-cols-1 justify-evenly gap-8 box-border p-3 w-[100vw] align-middle md:grid-cols-2 lg:grid-cols-3 ">
           {spots.map((spot) => (
@@ -30,24 +39,22 @@ const DiscoverPage = () => {
               key={spot.id}
               onMouseEnter={() => setHoveredCard(spot.id)}
               onMouseLeave={() => setHoveredCard(null)}
-              className={`bg-white rounded-3xl overflow-hidden border border-black/5 transition-all duration-500 cursor-pointer ${
-                hoveredCard === spot.id 
-                  ? 'shadow-2xl transform -translate-y-3' 
-                  : 'shadow-lg'
-              }`}
+              className={`bg-white rounded-3xl overflow-hidden border border-black/5 transition-all duration-500 cursor-pointer ${hoveredCard === spot.id
+                ? 'shadow-2xl transform -translate-y-3'
+                : 'shadow-lg'
+                }`}
             >
               {/* Image */}
               <div className="relative h-56 overflow-hidden">
-                <img 
-                  src={spot.image} 
+                <img
+                  src={spot.image}
                   alt={spot.name}
-                  className={`w-full h-full object-cover transition-transform duration-500 ${
-                    hoveredCard === spot.id ? 'scale-110' : 'scale-100'
-                  }`}
+                  className={`w-full h-full object-cover transition-transform duration-500 ${hoveredCard === spot.id ? 'scale-110' : 'scale-100'
+                    }`}
                 />
-                
+
                 <div className="absolute inset-0 bg-gradient-to-b from-black/10 to-transparent"></div>
-                
+
                 {/* Badges */}
                 <div className="absolute top-4 left-4 right-4 flex justify-between items-start">
                   {spot.isHiddenGem && (
@@ -56,19 +63,19 @@ const DiscoverPage = () => {
                       Hidden Gem
                     </div>
                   )}
-                  
+
                   <div className="ml-auto px-4 py-2 rounded-full text-xs font-semibold bg-[#313647] text-white shadow-lg">
                     {spot.type}
                   </div>
                 </div>
               </div>
-              
+
               {/* Content */}
               <div className="p-6">
                 <h3 className="text-2xl font-bold mb-4 text-[#313647] leading-tight">
                   {spot.name}
                 </h3>
-                
+
                 {/* Info Row */}
                 <div className="flex items-center gap-6 mb-4 text-sm text-[#435663] flex-wrap">
                   <div className="flex items-center gap-1.5 font-semibold">
@@ -85,11 +92,11 @@ const DiscoverPage = () => {
                     <span>{spot.price}</span>
                   </div>
                 </div>
-                
+
                 <p className="text-sm mb-5 text-[#435663]/80 leading-relaxed">
                   {spot.description}
                 </p>
-                
+
                 {/* Badges */}
                 <div className="flex flex-wrap gap-2 mb-5">
                   {spot.badges.map((badge, idx) => (

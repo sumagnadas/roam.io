@@ -15,18 +15,18 @@ const App = () => {
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#FFF8D4' }}>
       <Navigation currentPage={currentPage} setCurrentPage={setCurrentPage} />
-      
+
       {currentPage === 'home' && (
-        <HomePage 
+        <HomePage
           selectedMood={selectedMood}
           setSelectedMood={setSelectedMood}
           setCurrentPage={setCurrentPage}
         />
       )}
-      {currentPage === 'discover' && <DiscoverPage />}
+      {currentPage === 'discover' && <DiscoverPage selectedMood={selectedMood} />}
       {currentPage === 'events' && <EventsPage />}
       {currentPage === 'locals' && <LocalsPage />}
-      
+
       <HelpButton />
 
       <Footer />
