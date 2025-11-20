@@ -1,4 +1,3 @@
-// src/components/EventsPage.jsx
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, DollarSign, Ticket, Sparkles, TrendingUp } from 'lucide-react';
 import { events } from '../data/mockData';
