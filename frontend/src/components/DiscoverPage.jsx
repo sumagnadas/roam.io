@@ -6,8 +6,8 @@ const DiscoverPage = () => {
   const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
-    <div className="min-h-screen bg-[#FFF8D4] px-8 py-12">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-[#FFF8D4] py-12">
+      <div className="max-w-[100vw] mx-auto">
         {/* Header */}
         <div className="mb-12">
           <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#A3B087]/20 rounded-full mb-4">
@@ -24,7 +24,7 @@ const DiscoverPage = () => {
         </div>
         
         {/* Spots Grid */}
-        <div className="grid grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 justify-evenly gap-8 box-border p-3 w-[100vw] align-middle md:grid-cols-2 lg:grid-cols-3 ">
           {spots.map((spot) => (
             <div
               key={spot.id}
@@ -60,18 +60,6 @@ const DiscoverPage = () => {
                   <div className="ml-auto px-4 py-2 rounded-full text-xs font-semibold bg-[#313647] text-white shadow-lg">
                     {spot.type}
                   </div>
-                </div>
-
-                {/* Quick Actions */}
-                <div className={`absolute bottom-4 right-4 flex gap-2 transition-opacity duration-300 ${
-                  hoveredCard === spot.id ? 'opacity-100' : 'opacity-0'
-                }`}>
-                  <button className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center transition-transform hover:scale-110">
-                    <Heart className="w-4.5 h-4.5 text-[#313647]" />
-                  </button>
-                  <button className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center transition-transform hover:scale-110">
-                    <Share2 className="w-4.5 h-4.5 text-[#313647]" />
-                  </button>
                 </div>
               </div>
               
