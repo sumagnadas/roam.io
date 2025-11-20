@@ -10,7 +10,19 @@ class ReviewSerializer(serializers.ModelSerializer):
 
 
 class PlaceSerializer(serializers.ModelSerializer):
-    reviews = ReviewSerializer(many=True, read_only=True)
+    user_reviews = serializers.SerializerMethodField()
+    id = serializers.CharField()
+    name = serializers.CharField(max_length=255)
+    rating = serializers.FloatField()
+    styles = serializers.CharField()
+    phone = serializers.CharField()
+    address = serializers.CharField()
+    badges = serializers.SerializerMethodField()
+    reviews = serializers.IntegerField(source="reviews_cnt")
+    type = serializers.CharField(source="place_type")
+    image = serializers.URLField()
+    isHiddenGem = serializers.BooleanField(source="is_hidden_gem")
+    description = serializers.CharField(source="place_type")
 
     class Meta:
         model = Place
@@ -23,13 +35,28 @@ class PlaceSerializer(serializers.ModelSerializer):
             "address",
             "badges",
             "reviews",
-            "reviews_cnt",
-            "place_type",
+            "user_reviews",
             "image",
+            "type",
+            "isHiddenGem",
+            "description",
         ]
+
+    def get_user_reviews(self, obj):
+        reviews = Review.objects.filter(place=obj)
+        return ReviewSerializer(reviews, many=True).data
+
+    def get_badges(self, obj: Place):
+        badges = obj.badges.split(", ")
+        return badges
 
 
 class PlacesSerializer(serializers.ModelSerializer):
+    id = serializers.CharField()
+    name = serializers.CharField(max_length=255)
+    rating = serializers.FloatField()
+    styles = serializers.CharField()
+
     class Meta:
         model = Place
         fields = ["id", "name", "rating", "styles"]

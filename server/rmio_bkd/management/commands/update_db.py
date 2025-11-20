@@ -41,7 +41,7 @@ class Command(BaseCommand):
                     )
                     reviews_cnt = place_info.get("reviews", 0)
                     image = place_info.get("thumbnail", "")
-                    is_hidden_gem = rating >= 4.5 and reviews_cnt >= 50
+                    is_hidden_gem = rating >= 4.5 and reviews_cnt <= 50
 
                     obj, created = Place.objects.get_or_create(
                         id=place_id,
